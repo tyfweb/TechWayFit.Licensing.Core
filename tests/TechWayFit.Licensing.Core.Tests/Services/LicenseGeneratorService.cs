@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Logging;
-using TechWayFit.Licensing.Core.Contracts;
-using TechWayFit.Licensing.Core.Models;
+using TechWayFit.Licensing.Core.Tests.Contracts;
+using TechWayFit.Licensing.Core.Tests.Models;
 
-namespace TechWayFit.Licensing.Core.Services;
+namespace TechWayFit.Licensing.Core.Tests.Services;
 
 public class LicenseGeneratorService
 {

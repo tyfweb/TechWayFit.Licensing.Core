@@ -1,6 +1,6 @@
-using TechWayFit.Licensing.Core.Models;
+using TechWayFit.Licensing.Core.Tests.Models;
 
-namespace TechWayFit.Licensing.Core.Contracts;
+namespace TechWayFit.Licensing.Core.Tests.Contracts;
 
 public interface ILicenseGenerator
 {

@@ -1,4 +1,4 @@
-namespace TechWayFit.Licensing.Core.Models;
+namespace TechWayFit.Licensing.Core.Tests.Models;
 
 // These model classes are added for testing purposes only
 // They should match the actual model classes in the core project

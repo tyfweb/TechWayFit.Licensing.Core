@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TechWayFit.Licensing.Core.Models
 {
     /// <summary>
@@ -161,37 +163,55 @@ namespace TechWayFit.Licensing.Core.Models
         /// <summary>
         /// API Gateway product
         /// </summary>
+        [Display(Name = "API Gateway")]
         ApiGateway = 0,
 
         /// <summary>
         /// Web Application product
         /// </summary>
+        [Display(Name = "Web Application")]
         WebApplication = 1,
 
         /// <summary>
-        /// Enterprise Alerts module
+        /// Enterprise Application module
         /// </summary>
-        EnterpriseAlerts = 2,
+        [Display(Name = "Enterprise Application")]
+        EnterpriseApplication = 2,
 
         /// <summary>
-        /// Enterprise Backup module
+        /// Enterprise Application module with proprietary features
         /// </summary>
-        EnterpriseBackup = 3,
+        [Display(Name = "Enterprise Application (Proprietary)")]
+        Proprietary = 3,
 
         /// <summary>
         /// Enterprise Client Management module
         /// </summary>
-        EnterpriseClientMgmt = 4,
+        [Display(Name = "Enterprise Client Management")]
+        ClientManagement = 4,
 
         /// <summary>
         /// Enterprise Monitoring module
         /// </summary>
-        EnterpriseMonitoring = 5,
+        [Display(Name = "Enterprise Monitoring")]
+        Monitoring = 5,
 
         /// <summary>
         /// Enterprise User Management module
         /// </summary>
-        EnterpriseUserMgmt = 6
+        [Display(Name = "Enterprise User Management")]
+        UserManagement = 6,
+        /// <summary>
+        /// Mobile Application product
+        /// </summary>
+        [Display(Name = "Mobile Application")]
+        MobileApplication = 7,
+
+        /// <summary>
+        /// B2B Application product
+        /// </summary>
+        [Display(Name = "B2B Application")]
+        B2BApplication = 8
     }
 
     /// <summary>

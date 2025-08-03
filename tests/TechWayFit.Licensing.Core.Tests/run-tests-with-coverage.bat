@@ -7,7 +7,10 @@ if exist .\TestResults rmdir /s /q .\TestResults
 dotnet tool restore
 
 :: Run tests with coverage
-dotnet test --collect:"XPlat Code Coverage" --results-directory:.\TestResults
+dotnet test ^
+  --settings Tests.runsettings ^
+  --collect:"XPlat Code Coverage" ^
+  --results-directory:.\TestResults
 
 :: Generate HTML report
 dotnet reportgenerator -reports:".\TestResults\**\coverage.cobertura.xml" -targetdir:".\TestResults\CoverageReport" -reporttypes:Html

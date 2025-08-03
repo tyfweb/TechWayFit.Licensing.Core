@@ -1,18 +1,21 @@
 using System.Security.Cryptography;
 using Microsoft.Extensions.Logging;
-using TechWayFit.Licensing.Core.Models;
+using TechWayFit.Licensing.Core.Tests.Contracts;
+using TechWayFit.Licensing.Core.Tests.Models;
 
 namespace TechWayFit.Licensing.Core.Tests.Services;
 
-public class LicenseGeneratorServiceTests
+public partial class LicenseGeneratorServiceTests
 {
     private readonly Mock<ILicenseGenerator> _mockLicenseGenerator;
     private readonly Mock<ILogger<LicenseGeneratorService>> _mockLogger;
+    private readonly LicenseGeneratorService _service;
 
     public LicenseGeneratorServiceTests()
     {
         _mockLicenseGenerator = new Mock<ILicenseGenerator>();
         _mockLogger = new Mock<ILogger<LicenseGeneratorService>>();
+        _service = new LicenseGeneratorService(_mockLicenseGenerator.Object, _mockLogger.Object);
     }
 
     [Fact]
@@ -38,10 +41,8 @@ public class LicenseGeneratorServiceTests
         _mockLicenseGenerator.Setup(lg => lg.GenerateLicense(It.IsAny<LicenseData>()))
             .Returns(expectedLicense);
 
-        var service = new LicenseGeneratorService(_mockLicenseGenerator.Object, _mockLogger.Object);
-
         // Act
-        var result = service.GenerateLicense(licenseData);
+        var result = _service.GenerateLicense(licenseData);
 
         // Assert
         Assert.NotNull(result);
@@ -58,10 +59,8 @@ public class LicenseGeneratorServiceTests
         _mockLicenseGenerator.Setup(lg => lg.GenerateLicense(null))
             .Throws<ArgumentNullException>();
 
-        var service = new LicenseGeneratorService(_mockLicenseGenerator.Object, _mockLogger.Object);
-
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(() => service.GenerateLicense(null));
+        Assert.Throws<ArgumentNullException>(() => _service.GenerateLicense(null));
     }
 
     [Fact]
@@ -80,10 +79,8 @@ public class LicenseGeneratorServiceTests
         _mockLicenseGenerator.Setup(lg => lg.GenerateLicenseJson(It.IsAny<LicenseData>()))
             .Returns(expectedJson);
 
-        var service = new LicenseGeneratorService(_mockLicenseGenerator.Object, _mockLogger.Object);
-
         // Act
-        var result = service.GenerateLicenseJson(licenseData);
+        var result = _service.GenerateLicenseJson(licenseData);
 
         // Assert
         Assert.NotNull(result);
@@ -107,10 +104,8 @@ public class LicenseGeneratorServiceTests
         _mockLicenseGenerator.Setup(lg => lg.SignLicense(It.IsAny<LicenseData>(), It.IsAny<string>()))
             .Returns(expectedSignature);
 
-        var service = new LicenseGeneratorService(_mockLicenseGenerator.Object, _mockLogger.Object);
-
         // Act
-        var result = service.SignLicense(licenseData, privateKey);
+        var result = _service.SignLicense(licenseData, privateKey);
 
         // Assert
         Assert.NotNull(result);
@@ -132,10 +127,8 @@ public class LicenseGeneratorServiceTests
         _mockLicenseGenerator.Setup(lg => lg.SignLicense(It.IsAny<LicenseData>(), invalidKey))
             .Throws<CryptographicException>();
 
-        var service = new LicenseGeneratorService(_mockLicenseGenerator.Object, _mockLogger.Object);
-
         // Act & Assert
-        Assert.Throws<CryptographicException>(() => service.SignLicense(licenseData, invalidKey));
+        Assert.Throws<CryptographicException>(() => _service.SignLicense(licenseData, invalidKey));
     }
 
     [Fact]
@@ -165,10 +158,8 @@ public class LicenseGeneratorServiceTests
         _mockLicenseGenerator.Setup(lg => lg.GenerateAndSignLicense(It.IsAny<LicenseData>(), It.IsAny<string>()))
             .Returns(expectedLicense);
 
-        var service = new LicenseGeneratorService(_mockLicenseGenerator.Object, _mockLogger.Object);
-
         // Act
-        var result = service.GenerateAndSignLicense(licenseData, privateKey);
+        var result = _service.GenerateAndSignLicense(licenseData, privateKey);
 
         // Assert
         Assert.NotNull(result);
@@ -196,10 +187,8 @@ public class LicenseGeneratorServiceTests
         _mockLicenseGenerator.Setup(lg => lg.ExportLicenseToFile(It.IsAny<SignedLicense>(), It.IsAny<string>()))
             .Returns(true);
 
-        var service = new LicenseGeneratorService(_mockLicenseGenerator.Object, _mockLogger.Object);
-
         // Act
-        var result = service.ExportLicenseToFile(signedLicense, filePath);
+        var result = _service.ExportLicenseToFile(signedLicense, filePath);
 
         // Assert
         Assert.True(result);
@@ -219,10 +208,8 @@ public class LicenseGeneratorServiceTests
         _mockLicenseGenerator.Setup(lg => lg.GenerateKeyPair(It.IsAny<int>()))
             .Returns(expectedKeyPair);
 
-        var service = new LicenseGeneratorService(_mockLicenseGenerator.Object, _mockLogger.Object);
-
         // Act
-        var result = service.GenerateKeyPair(2048);
+        var result = _service.GenerateKeyPair(2048);
 
         // Assert
         Assert.NotNull(result);
@@ -239,9 +226,7 @@ public class LicenseGeneratorServiceTests
         _mockLicenseGenerator.Setup(lg => lg.GenerateKeyPair(keySize))
             .Throws<ArgumentException>();
 
-        var service = new LicenseGeneratorService(_mockLicenseGenerator.Object, _mockLogger.Object);
-
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => service.GenerateKeyPair(keySize));
+        Assert.Throws<ArgumentException>(() => _service.GenerateKeyPair(keySize));
     }
 }
