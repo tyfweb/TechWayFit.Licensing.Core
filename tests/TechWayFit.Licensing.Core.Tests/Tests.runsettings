@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <Exclude>[*]*.Program,[*]*.*Tests*,[*]*.*Startup*</Exclude>
+          <Include>[TechWayFit.Licensing.Core.Tests.*]*</Include>
+          <ExcludeByAttribute>Obsolete,GeneratedCodeAttribute,CompilerGeneratedAttribute</ExcludeByAttribute>
+          <ExcludeByFile>**/obj/**/*.cs</ExcludeByFile>
+          <SkipAutoProps>true</SkipAutoProps>
+          <DeterministicReport>false</DeterministicReport>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
